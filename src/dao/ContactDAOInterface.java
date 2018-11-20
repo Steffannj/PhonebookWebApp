@@ -8,13 +8,13 @@ import model.User;
 
 public interface ContactDAOInterface {
 
-	public void addContact(User user) throws SQLException;
+	public void addContact(String firstname, String lastname, String phoneNumber, User user) throws SQLException;
 
 	public void updateContact(Contact contact) throws SQLException;
 
-	public void deleteContact(Contact contact) throws SQLException;
+	public void deleteContact(String id) throws SQLException;
 
-	public ArrayList<Contact>getContacts(User user) throws SQLException;
+	public ArrayList<Contact> getContacts(User user) throws SQLException;
 
 	public void searchContactByFirstname(User user) throws SQLException;
 

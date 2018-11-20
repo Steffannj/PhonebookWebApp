@@ -10,5 +10,6 @@ public interface UserDAOInterface {
 	
 	public User login(String username, String password) throws SQLException;
 	
-
+	public boolean exists(String email) throws SQLException;
+	
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -35,7 +37,7 @@
                 </label>
               </div>
                 <button type = "submit" class="btn btn-primary" role="button">Login</button>
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#signUp" style="float: right;">Sing up</button>
+			  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#signUp" style="float: right;">Sing up</button>
 
           </form>
         </div>
@@ -48,7 +50,8 @@
     </footer>
 
     <!-- Modal -->
-    <div class="modal fade" id="signUp">
+    
+     <div class="modal fade" id="signUp">
       <div class="modal-dialog" role="document">
         <div class="modal-content" style="background-image: url(img/signup.jpg)">
           <div class="modal-header">
@@ -57,54 +60,51 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <form action="Register" method="post">
           <div class="modal-body">
             <div class="row">
-                <div class="col-3">
-                    <label style="color: white;margin-top: 7%"><h6>Firstname</h6></label>
-                </div>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" placeholder="Enter firstname">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-3">
-                    <label style="color: white;margin-top: 7%"><h6>Lastname</h6></label>
-                </div>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" placeholder="Enter lastname">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-3">
+                <div class="col-4">
                     <label style="color: white;margin-top: 7%"><h6>Email</h6></label>
                 </div>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" placeholder="example@email.com">
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="example@email.com" name="email" required>
                 </div>
             </div>
             <div class="row">
-                <div class="col-3">
+                <div class="col-4">
                     <label style="color: white;margin-top: 7%"><h6>Username</h6></label>
                 </div>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" placeholder="Enter username">
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="Enter username" name = "username" required>
                 </div>
             </div>
             <div class="row">
-                <div class="col-3">
+                <div class="col-4">
                     <label style="color: white;margin-top: 7%"><h6>Password</h6></label>
                 </div>
-                <div class="col-md-9">
-                    <input type="password" class="form-control" placeholder="Enter password">
+                <div class="col-md-8">
+                    <input type="password" class="form-control" placeholder="Enter password" name = "password" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label style="color: white;margin-top: 7%"><h6>Repeat password</h6></label>
+                </div>
+                <div class="col-md-8">
+                    <input type="password" class="form-control" placeholder="Enter password" name = "repeatPassword" required>
                 </div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary">Register</button>
           </div>
+             </form>
         </div>
       </div>
     </div>
+    
+ 
+   
     </body>
 </html>

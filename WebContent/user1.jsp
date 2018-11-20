@@ -48,7 +48,7 @@ if(session.getAttribute("uname") == null)
 									placeholder="Search">
 							</div>
 							<div class="col-2">
-								<button type="button" class="btn btn-sm btn-info">
+								<button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#add">
 									Add New <i class="fa fa-user-plus"></i>
 								</button>
 							</div>
@@ -69,13 +69,14 @@ if(session.getAttribute("uname") == null)
 										<td><c:out value="${contact.firstname}" /></td>
 										<td><c:out value="${contact.lastname}" /></td>
 										<td><c:out value="${contact.phoneNumber}" /></td>
-
+										
 										<td><button type="button" class="btn btn-outline-warning">
 												<i class="fa fa-pencil">
 											</button></td>
-										<td><button type="button" class="btn btn-outline-danger">
+										<td><a href ="delete.jsp?id=${contact.contactId}" name = id" class="btn btn-outline-danger">
 												<i class="fa fa-trash">
-											</button></td>
+										</td>
+											
 									</tr>
 								</c:forEach>
 
@@ -97,6 +98,53 @@ if(session.getAttribute("uname") == null)
 				class="text-success"> Stefan Njegomirovic</a>
 		</div>
 	</footer>
+	<div class="modal fade" id="add">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-image: url(img/signup.jpg)">
+          <div class="modal-header">
+            <h4 style="color: white">Add contact</h4>
+            <button type="button" class="close" data-dismiss="modal" >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="AddContact" method="post">
+          <div class="modal-body">
+            <div class="row">
+                <div class="col-4">
+                    <label style="color: white;margin-top: 7%"><h6>Firstname</h6></label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="Enter firstname" name="firstname" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label style="color: white;margin-top: 7%"><h6>Lastname</h6></label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="Enter lastname" name = "lastname" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label style="color: white;margin-top: 7%"><h6>Phone number</h6></label>
+                </div>
+                <div class="col-md-8">
+                    <input type="password" class="form-control" placeholder="Enter phone number" name = "phonenumber" required>
+                </div>
+            </div>
+         
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Add</button>
+          </div>
+             </form>
+        </div>
+      </div>
+    </div>
+    
+ 
 </body>
 
 </html>

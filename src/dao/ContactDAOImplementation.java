@@ -17,19 +17,8 @@ public class ContactDAOImplementation implements ContactDAOInterface {
 	private Scanner input;
 
 	@Override
-	public void addContact(User user) throws SQLException {
+	public void addContact(String firstname, String lastname, String phoneNumber, User user) throws SQLException {
 		String query = "INSERT INTO contact(firstname, lastname, phoneNumber, userId) VALUES (?,?,?,?)";
-
-		input = new Scanner(System.in);
-
-		System.out.println("Enter firstname: ");
-		String firstname = input.nextLine();
-
-		System.out.println("Enter lastname: ");
-		String lastname = input.nextLine();
-
-		System.out.println("Enter phoneNumber: ");
-		String phoneNumber = input.nextLine();
 
 		try (PreparedStatement statement = conn.prepareStatement(query)) {
 			statement.setString(1, firstname);
@@ -70,13 +59,13 @@ public class ContactDAOImplementation implements ContactDAOInterface {
 	}
 
 	@Override
-	public void deleteContact(Contact contact) throws SQLException {
+	public void deleteContact(String id) throws SQLException {
 
 		String query = "DELETE FROM contact WHERE contactId = ?";
 
 		try (PreparedStatement statement = conn.prepareStatement(query)) {
 
-			statement.setInt(1, contact.getContactId());
+			statement.setString(1, id);
 
 			statement.execute();
 
@@ -88,7 +77,7 @@ public class ContactDAOImplementation implements ContactDAOInterface {
 	public ArrayList<Contact> getContacts(User user) throws SQLException {
 		String query = "SELECT * FROM contact WHERE userId = ?";
 		ArrayList<Contact> listOfContacts = new ArrayList<>();
-		
+
 		try (PreparedStatement statement = conn.prepareStatement(query)) {
 
 			statement.setInt(1, user.getUserId());

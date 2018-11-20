@@ -53,6 +53,30 @@ public class UserDAOImplementation implements UserDAOInterface {
 		return user;
 	}
 
+	@Override
+	public boolean exists(String email) throws SQLException {
+		boolean exist = false;
+		
+		String query = "SELECT * FROM user WHERE email = ?";
+		
+		try(PreparedStatement statement = conn.prepareStatement(query)){
+			statement.setString(1, email);
+			
+			ResultSet rs = statement.executeQuery();
+			
+			String check = "";
+			if(rs.next()) {
+				check = rs.getString("email");
+			}
+			if(check != "") {
+				exist = true;
+			}
+		}
+		return exist;
+	}
+
+
+
 	
 
 
