@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import database.ConnectionManager;
 import model.Contact;
@@ -14,7 +13,6 @@ import model.User;
 public class ContactDAOImplementation implements ContactDAOInterface {
 
 	Connection conn = ConnectionManager.getInstance().getConnection();
-	private Scanner input;
 
 	@Override
 	public void addContact(String firstname, String lastname, String phoneNumber, User user) throws SQLException {
@@ -31,46 +29,20 @@ public class ContactDAOImplementation implements ContactDAOInterface {
 	}
 
 	@Override
-	public void updateContact(Contact contact) throws SQLException {
+	public void editContact(String newFirstname, String newLastname, String newNumber, String contactId) throws SQLException {
 		String query = "UPDATE contact SET firstname = ?, lastname = ?, phoneNumber = ? WHERE contactId = ?";
-
-		input = new Scanner(System.in);
-
-		System.out.println("Enter new firstname: ");
-		String newFirstname = input.nextLine();
-
-		System.out.println("Enter new lastname: ");
-		String newLastname = input.nextLine();
-
-		System.out.println("Enter new phone number: ");
-		String newPhoneNumber = input.nextLine();
 
 		try (PreparedStatement statement = conn.prepareStatement(query)) {
 			statement.setString(1, newFirstname);
 			statement.setString(2, newLastname);
-			statement.setString(3, newPhoneNumber);
-			statement.setInt(4, contact.getContactId());
+			statement.setString(3, newNumber);
+			statement.setString(4, contactId);
 
 			statement.execute();
 
 			System.out.println("Successfully updated.");
 		}
 
-	}
-
-	@Override
-	public void deleteContact(String id) throws SQLException {
-
-		String query = "DELETE FROM contact WHERE contactId = ?";
-
-		try (PreparedStatement statement = conn.prepareStatement(query)) {
-
-			statement.setString(1, id);
-
-			statement.execute();
-
-			System.out.println("Successfully deleted.");
-		}
 	}
 
 	@Override
@@ -101,80 +73,40 @@ public class ContactDAOImplementation implements ContactDAOInterface {
 	}
 
 	@Override
-	public void searchContactByFirstname(User user) throws SQLException {
-
-		input = new Scanner(System.in);
-
-		System.out.println("Enter firstname: ");
-		String firstname = input.nextLine();
-
-		String query = "SELECT * FROM contact WHERE firstname = ? AND userId = ?";
+	public ArrayList<Contact> searchContact(String search, User user) throws SQLException {
+		ArrayList<Contact> searchResult = new ArrayList<>();
+		Contact c = new Contact();
+		String query = "SELECT * FROM contact WHERE firstname LIKE ? OR lastname LIKE ? AND userId = ?";
 
 		try (PreparedStatement statement = conn.prepareStatement(query)) {
 
-			statement.setString(1, firstname);
-			statement.setInt(2, user.getUserId());
-
+			statement.setString(1, search);
+			statement.setString(2, search);
+			statement.setInt(3, user.getUserId());
 			ResultSet rs = statement.executeQuery();
 
 			if (rs.next()) {
 				do {
-					System.out.println(rs.getString("firstname") + " " + rs.getString("lastname") + " "
-							+ rs.getString("phoneNumber"));
-
+					c.setFirstname(rs.getString("firstname"));
+					c.setLastname(rs.getString("lastname"));
+					c.setPhoneNumber(rs.getString("phoneNumber"));
+					searchResult.add(c);
 				} while (rs.next());
-			} else {
-				System.out.println("No contacts found.");
-			}
-		}
-
-	}
-
-	@Override
-	public void searchContactByLastname(User user) throws SQLException {
-
-		input = new Scanner(System.in);
-
-		System.out.println("Enter lastname: ");
-		String lastname = input.nextLine();
-
-		String query = "SELECT * FROM contact WHERE lastname = ? AND userId = ?";
-
-		try (PreparedStatement statement = conn.prepareStatement(query)) {
-
-			statement.setString(1, lastname);
-			statement.setInt(2, user.getUserId());
-
-			ResultSet rs = statement.executeQuery();
-
-			if (rs.next()) {
-				do {
-					System.out.println(rs.getString("firstname") + " " + rs.getString("lastname") + " "
-							+ rs.getString("phoneNumber"));
-
-				} while (rs.next());
-			} else {
-				System.out.println("No contacts found.");
 			}
 
 		}
+		return searchResult;
 	}
 
 	@Override
-	public Contact getContact(User user) throws SQLException {
+	public Contact getContact(String id) throws SQLException {
 		Contact contact = new Contact();
 
-		input = new Scanner(System.in);
-
-		System.out.println("Enter contactId: ");
-		int contactId = input.nextInt();
-
-		String query = "SELECT *  FROM contact WHERE contactId = ? AND userId = ?";
+		String query = "SELECT *  FROM contact WHERE contactId = ?";
 
 		try (PreparedStatement statement = conn.prepareStatement(query)) {
 
-			statement.setInt(1, contactId);
-			statement.setInt(2, user.getUserId());
+			statement.setString(1, id);
 
 			ResultSet rs = statement.executeQuery();
 
@@ -184,8 +116,6 @@ public class ContactDAOImplementation implements ContactDAOInterface {
 				contact.setLastname(rs.getString("lastname"));
 				contact.setPhoneNumber(rs.getString("phoneNumber"));
 				contact.setUserId(rs.getInt("userId"));
-			} else {
-				System.out.println("No contacts found.");
 			}
 		}
 		return contact;

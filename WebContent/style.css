@@ -4,17 +4,27 @@ body{
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
+  height: 100%;
 }
 .usernameAndPassword{
   color: white;
 }
-.footer {
-  color: white;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: linear-gradient(black, rgba(159,12,12,0.5));
+.table thead{
+	background: GoldenRod;
+	
 }
+
+tbody {
+    display:block;
+    height:25em;
+    overflow:auto;
+}
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
 .footerText{
   padding: 1%;
 }

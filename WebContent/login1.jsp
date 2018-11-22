@@ -16,14 +16,14 @@
 </head>
 
   <body>
-    <div class="container">
+    <div class="container" style="margin-bottom:10em;">
       <div class="row">
-        <div class="col-12">
+        <div class="col-lg-12">
           <h2 style="margin-top: 10%; color: white">Welcome to phonebook</h2>
         </div>
       </div>
       <div class="row">
-        <div class="col-7">
+        <div class="col-lg-7">
           <form action="Login" method = "post">
               <div class="form-group" style="margin-top: 20%;">
                 <label class="usernameAndPassword">Username</label>
@@ -43,11 +43,12 @@
         </div>
       </div>
     </div>
-    <footer class="footer">
-      <div class="footerText text-center">© 2018 Copyright:
-            <a href="https://github.com/Steffannj" class="text-success"> Stefan Njegomirovic</a>
-          </div>
-    </footer>
+     <footer class="page-footer" style="background: linear-gradient(black, rgba(159,12,12,0.5)); color: white; ">
+			<div class="footerText text-center">
+				© 2018 Copyright: <a href="https://github.com/Steffannj"
+					class="text-success"> Stefan Njegomirovic</a>
+			</div>
+	</footer>
 
     <!-- Modal -->
     
@@ -63,23 +64,23 @@
           <form action="Register" method="post">
           <div class="modal-body">
             <div class="row">
-                <div class="col-4">
+                <div class="col-lg-4">
                     <label style="color: white;margin-top: 7%"><h6>Email</h6></label>
                 </div>
-                <div class="col-md-8">
+                <div class="col-lg-8">
                     <input type="text" class="form-control" placeholder="example@email.com" name="email" required>
                 </div>
             </div>
             <div class="row">
-                <div class="col-4">
+                <div class="col-lg-4">
                     <label style="color: white;margin-top: 7%"><h6>Username</h6></label>
                 </div>
-                <div class="col-md-8">
+                <div class="col-lg-8">
                     <input type="text" class="form-control" placeholder="Enter username" name = "username" required>
                 </div>
             </div>
             <div class="row">
-                <div class="col-4">
+                <div class="col-lg-4">
                     <label style="color: white;margin-top: 7%"><h6>Password</h6></label>
                 </div>
                 <div class="col-md-8">
@@ -87,10 +88,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-4">
+                <div class="col-lg-4">
                     <label style="color: white;margin-top: 7%"><h6>Repeat password</h6></label>
                 </div>
-                <div class="col-md-8">
+                <div class="col-lg-8">
                     <input type="password" class="form-control" placeholder="Enter password" name = "repeatPassword" required>
                 </div>
             </div>

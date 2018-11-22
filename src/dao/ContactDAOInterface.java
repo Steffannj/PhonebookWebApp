@@ -10,15 +10,11 @@ public interface ContactDAOInterface {
 
 	public void addContact(String firstname, String lastname, String phoneNumber, User user) throws SQLException;
 
-	public void updateContact(Contact contact) throws SQLException;
-
-	public void deleteContact(String id) throws SQLException;
+	public void editContact(String newFirstname, String newLastname, String newNubmer, String contactId) throws SQLException;
 
 	public ArrayList<Contact> getContacts(User user) throws SQLException;
 
-	public void searchContactByFirstname(User user) throws SQLException;
+	public ArrayList<Contact> searchContact(String search, User user) throws SQLException;
 
-	public void searchContactByLastname(User user) throws SQLException;
-
-	public Contact getContact(User user) throws SQLException;
+	public Contact getContact(String id) throws SQLException;
 }
