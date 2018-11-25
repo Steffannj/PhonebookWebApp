@@ -30,7 +30,6 @@ public class Login extends HttpServlet {
 			User user = userDAO.login(uname, pass);
 
 			if (user.getUserId() != 0) {
-				request.getSession().setAttribute("uname", uname);
 				request.getSession().setAttribute("user", user);
 				request.getSession().setAttribute("list", contactDAO.getContacts(user));
 				request.getRequestDispatcher("/user1.jsp").forward(request, response);

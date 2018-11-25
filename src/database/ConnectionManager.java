@@ -49,7 +49,6 @@ private static ConnectionManager instance = null;
 	public Connection getConnection() {
 		if (connection == null) {
 			if (openConnection()) {
-				System.out.println("Success");
 				return connection;
 			} else {
 				return null;

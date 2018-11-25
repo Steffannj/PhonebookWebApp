@@ -21,10 +21,6 @@ public class Edit extends HttpServlet {
 		String newLastname = request.getParameter("editedlastname");
 		String newNumber = request.getParameter("editedphonenumber");
 		String id = request.getParameter("id");
-		System.out.println(newFirstname);
-		System.out.println(newLastname);
-		System.out.println(newNumber);
-		System.out.println(id);
 		User user = (User) request.getSession().getAttribute("user");
 		ContactDAOImplementation contactDAO = new ContactDAOImplementation();
 		

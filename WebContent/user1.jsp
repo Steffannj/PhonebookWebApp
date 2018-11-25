@@ -26,10 +26,7 @@
 
 <body>
 	<%
-		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-
-		if (session.getAttribute("uname") == null)
-			response.sendRedirect("login1.jsp");
+		response.setHeader("Cache-control", "no-store");
 	%>
 
 
@@ -38,7 +35,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h2 style="margin-top: 3%; margin-left: 15%; color: white">Welcome
-					${uname} to your phonebook</h2>
+					${user.username} to your phonebook</h2>
 			</div>
 		</div>
 
@@ -62,7 +59,7 @@
 						</button>
 					</div>
 				</div>
-				
+
 				<table class="table table-striped"
 					style="margin-left: 5%; margin-top: 3%; color: white">
 

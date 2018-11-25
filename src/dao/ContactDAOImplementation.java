@@ -40,7 +40,6 @@ public class ContactDAOImplementation implements ContactDAOInterface {
 
 			statement.execute();
 
-			System.out.println("Successfully updated.");
 		}
 
 	}
@@ -65,8 +64,6 @@ public class ContactDAOImplementation implements ContactDAOInterface {
 					c.setPhoneNumber(rs.getString("phoneNumber"));
 					listOfContacts.add(c);
 				} while (rs.next());
-			} else {
-				System.out.println("List is empty.");
 			}
 		}
 		return listOfContacts;

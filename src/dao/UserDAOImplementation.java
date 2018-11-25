@@ -23,7 +23,6 @@ public class UserDAOImplementation implements UserDAOInterface {
 			statement.setString(3, email);
 
 			statement.execute();
-			System.out.println("Successfully registered!");
 		}
 
 	}
@@ -32,7 +31,7 @@ public class UserDAOImplementation implements UserDAOInterface {
 	public User login(String username, String password) throws SQLException {
 		User user = new User();
 
-		String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+		String query = "SELECT * FROM user WHERE binary username = binary ? AND binary password = binary ?";
 
 		try (PreparedStatement statement = conn.prepareStatement(query)) {
 			statement.setString(1, username);
@@ -45,8 +44,6 @@ public class UserDAOImplementation implements UserDAOInterface {
 				user.setUsername(rs.getString("username"));
 				user.setPassword(rs.getString("password"));
 				user.setEmail(rs.getString("email"));
-
-				System.out.println("Successfully loged in!");
 			}
 		}
 

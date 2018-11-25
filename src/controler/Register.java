@@ -25,20 +25,22 @@ public class Register extends HttpServlet {
 
 		UserDAOImplementation userDAO = new UserDAOImplementation();
 		if (!password.equals(repeatPassword)) {
-			request.setAttribute("message", "Passwords do not match.");
+			request.setAttribute("message", "Registration failed. Passwords do not match.");
 			request.getRequestDispatcher("/login1.jsp").forward(request, response);
+			
 		} else {
 			if (password.length() < 8) {
-				request.setAttribute("message", "Password must be at least 8 characters.");
+				request.setAttribute("message", "Registration failed. Password must be at least 8 characters.");
 				request.getRequestDispatcher("/login1.jsp").forward(request, response);
 			} else {
 				try {
 					if (userDAO.exists(email)) {
-						request.setAttribute("message", "An account with this email already exists.");
+						request.setAttribute("message", "Registration failed. An account with this email already exists.");
 						request.getRequestDispatcher("/login1.jsp").forward(request, response);
 					} else {
 						userDAO.addUser(username, password, email);
-						response.sendRedirect("/PhonebookWebApp/login1.jsp");
+						request.setAttribute("message", "Successfuly registered.");
+						request.getRequestDispatcher("/login1.jsp").forward(request, response);
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
